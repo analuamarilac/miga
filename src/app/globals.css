@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Miga — design tokens
+   Paleta extraída do mockup de referência.
+------------------------------------------------------------------ */
+@theme {
+  /* Neutros */
+  --color-espresso: #381b1a;
+  --color-espresso-soft: #5a3b38;
+  --color-cream: #fbf7f0;
+  --color-cream-deep: #f5f1e8;
+  --color-sand: #f5f1ed;
+
+  /* Rosas */
+  --color-blush: #fcd8e4;
+  --color-blush-soft: #fbecee;
+  --color-rose: #f7ccd9;
+  --color-fuchsia-star: #f172a6;
+
+  /* Azuis */
+  --color-sky: #dceafa;
+  --color-sky-line: #c9def6;
+  --color-sky-soft: #eaf3fd;
+
+  /* Lilases */
+  --color-lilac: #efe2f6;
+  --color-lilac-deep: #e4d2f0;
+  --color-violet-bar: #9b7bd4;
+
+  /* Amarelo */
+  --color-butter: #fce9a4;
+  --color-butter-soft: #fdf3cf;
+
+  /* Tipografia */
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* Motion */
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-espresso);
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-blush);
+    color: var(--color-espresso);
+  }
+
+  /* Foco visível e consistente em toda a página */
+  :focus-visible {
+    outline: 2px solid var(--color-espresso);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Rótulo em caixa alta com tracking largo — usado em todas as seções */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  /* Título editorial serifado */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+  }
+
+  /* Fundo listrado azul do hero e da seção de rotina */
+  .stripes-sky {
+    background-color: var(--color-sky);
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--color-sky-line) 0px,
+      var(--color-sky-line) 2px,
+      transparent 2px,
+      transparent 11px
+    );
+  }
+
+  /* Textura sutil de papel sobre fundos claros */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.22'/%3E%3C/svg%3E");
+  }
+}
