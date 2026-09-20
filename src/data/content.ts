@@ -58,8 +58,8 @@ export const articles: Article[] = [
 ];
 
 export const clubPerks = [
-  "Acesso antecipado",
-  "Dicas de rotina",
-  "Reviews reais",
-  "Comunidade",
+  { icon: "sparkle" as const, label: "Acesso antecipado", detail: "Lançamentos antes de todo mundo" },
+  { icon: "clock" as const, label: "Dicas de rotina", detail: "Um passo por semana, sem pressa" },
+  { icon: "heart" as const, label: "Reviews reais", detail: "De quem tem a pele parecida" },
+  { icon: "chat" as const, label: "Comunidade", detail: "Um grupo que responde de verdade" },
 ];

@@ -53,6 +53,7 @@ Conteúdo e apresentação são separados: os textos, produtos e perguntas do qu
 - **Rotina manhã / noite** — alterna os três passos com uma pílula que desliza entre as opções (`layoutId`).
 - **Resultados** — os percentuais contam de zero quando a seção entra na viewport.
 - **Newsletter** — validação de e-mail no cliente, com estado de erro e de sucesso (sem back-end).
+- **Clube Miga** — a foto traz as amigas usando as Pétalas para os Olhos, e um selo sobre a imagem leva desse uso direto ao produto.
 - **Aviso de frete** — dispensável, e a escolha persiste na sessão.
 - **Navegação** — cabeçalho fixo que encolhe ao rolar e menu lateral no mobile.
 - **Entrada de seções** — revelação progressiva conforme a rolagem.

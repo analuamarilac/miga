@@ -166,3 +166,9 @@ export const Lock = ({ className = "h-4 w-4" }: IconProps) => (
     <path d="M8.4 10.4V7.8a3.6 3.6 0 0 1 7.2 0v2.6" />
   </svg>
 );
+
+export const Chat = ({ className = "h-4 w-4" }: IconProps) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+    <path d="M20.5 11.6c0 3.9-3.8 7-8.5 7-1 0-2-.15-2.9-.4L4 19.8l1.3-3.5A6.7 6.7 0 0 1 3.5 11.6c0-3.9 3.8-7 8.5-7s8.5 3.1 8.5 7z" />
+  </svg>
+);
