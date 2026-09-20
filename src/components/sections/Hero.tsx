@@ -1,37 +1,29 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
-import {
-  CircleBlob,
-  DropBlob,
-  Float,
-  FlowerBlob,
-  SparkleBlob,
-} from "@/components/art/Blobs";
-import { ProductPhoto } from "@/components/ui/ProductPhoto";
-import { LinkButton } from "@/components/ui/Button";
+import { Sticker } from "@/components/art/Sticker";
+import { Clock, ImageIcon, Sparkle } from "@/components/art/Icons";
+import { Navbar } from "@/components/layout/Navbar";
+import { HeroForm } from "@/components/sections/HeroForm";
 
-/** Texto vertical das bordas — decorativo, some em telas pequenas. */
-function EdgeNote({
-  lines,
-  className,
-  align = "left",
-}: {
-  lines: string[];
-  className: string;
-  align?: "left" | "right";
-}) {
-  return (
-    <div className={`eyebrow hidden text-espresso/55 xl:block ${className}`}>
-      {lines.map((line) => (
-        <p key={line}>{line}</p>
-      ))}
-      <span
-        className={`mt-3 block h-px w-6 bg-espresso/40 ${align === "right" ? "ml-auto" : ""}`}
-      />
-    </div>
-  );
-}
+const benefits = [
+  {
+    Icon: ImageIcon,
+    title: "Leitura visual + perguntas",
+    description: "Uma análise completa e prática.",
+  },
+  {
+    Icon: Clock,
+    title: "Recomendação em poucos minutos",
+    description: "Mais clareza para sua rotina.",
+  },
+  {
+    Icon: Sparkle,
+    title: "Rotina simples e personalizada",
+    description: "Cuidados que fazem sentido para você.",
+  },
+];
 
 export function Hero() {
   const reduceMotion = useReducedMotion();
@@ -40,175 +32,133 @@ export function Hero() {
     reduceMotion
       ? {}
       : {
-          initial: { opacity: 0, y: 26 },
+          initial: { opacity: 0, y: 24 },
           animate: { opacity: 1, y: 0 },
           transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] as const },
         };
 
   return (
-    <section
-      id="topo"
-      className="stripes-sky grain relative overflow-hidden"
-      aria-label="Destaque"
-    >
-      {/* Camada decorativa.
-          No mobile o hero empilha texto e frasco, então as formas ficam
-          concentradas na metade de baixo para não disputar com o título. */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <Float
-          className="absolute left-[6%] top-[62%] w-10 lg:top-[14%] lg:w-14"
-          duration={8}
-        >
-          <DropBlob className="w-full opacity-70" />
-        </Float>
-        <Float
-          className="absolute left-[28%] top-[8%] hidden w-8 lg:block lg:w-12"
-          duration={9}
-          delay={1.2}
-        >
-          <DropBlob className="w-full opacity-60" tone="#f4f9ff" />
-        </Float>
-        <Float
-          className="absolute bottom-[8%] left-[12%] w-7 lg:bottom-[18%] lg:left-[16%] lg:w-10"
-          duration={7}
-          delay={0.6}
-        >
-          <DropBlob className="w-full opacity-50" />
-        </Float>
-        <Float
-          className="absolute left-[8%] top-[52%] w-10 lg:left-[20%] lg:w-16"
-          duration={6.5}
-          delay={0.3}
-        >
-          <SparkleBlob className="w-full" />
-        </Float>
-        <Float
-          className="absolute right-[6%] top-[58%] w-20 lg:right-[12%] lg:top-[16%] lg:w-32"
-          duration={9}
-        >
-          <FlowerBlob className="w-full" />
-        </Float>
-        <Float
-          className="absolute right-[10%] top-[80%] w-12 lg:right-[4%] lg:top-[30%] lg:w-20"
-          duration={8}
-          delay={0.8}
-        >
-          <CircleBlob className="w-full" tone="#f4e4a8" />
-        </Float>
-        <Float
-          className="absolute bottom-[20%] right-[16%] w-12 lg:bottom-[26%] lg:w-20"
-          duration={7.5}
-          delay={1.5}
-        >
-          <CircleBlob className="w-full" tone="#f7cedd" />
-        </Float>
-        <Float
-          className="absolute bottom-[4%] right-[6%] w-10 lg:bottom-[12%] lg:w-14"
-          duration={8.5}
-          delay={0.4}
-        >
-          <DropBlob className="w-full opacity-70" />
-        </Float>
-      </div>
+    <section id="topo" className="relative bg-cream p-3 md:p-4" aria-label="Destaque">
+      <div className="relative overflow-hidden rounded-[26px] md:rounded-[32px]">
+        <Image
+          src="/hero/amigas-banheiro.webp"
+          alt="Duas amigas juntas no banheiro; uma delas segura o Creme Hidratante Miga e a outra tem creme aplicado na bochecha"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[58%_22%] md:object-center"
+        />
 
-      <div className="relative mx-auto flex max-w-[1600px] flex-col px-5 py-14 md:px-10 md:py-20 lg:min-h-[calc(100vh-7rem)] lg:justify-center lg:py-24">
-        {/* Frasco grande à esquerda (desktop) */}
-        <motion.div
-          {...(reduceMotion
-            ? {}
-            : {
-                initial: { opacity: 0, x: -40, rotate: -14 },
-                animate: { opacity: 1, x: 0, rotate: -8 },
-                transition: { duration: 1, ease: [0.22, 1, 0.36, 1] as const },
-              })}
-          className="pointer-events-none absolute -left-10 top-1/2 hidden w-[19rem] -translate-y-1/2 lg:block xl:left-4 xl:w-[21rem]"
+        {/* Escurecimento para o texto branco ter contraste sobre a foto */}
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-espresso/25 via-espresso/50 to-espresso/60 md:bg-gradient-to-r md:from-espresso/60 md:via-espresso/18 md:to-transparent"
           aria-hidden="true"
-        >
-          <ProductPhoto
-            id="gel-de-limpeza-equilibrio"
-            priority
-            sizes="(max-width: 1024px) 0px, 21rem"
-            className="h-auto w-full drop-shadow-[0_28px_44px_rgba(56,27,26,0.16)]"
-          />
-        </motion.div>
-
-        <EdgeNote
-          lines={["Skincare", "de verdade", "entre amigas", "sempre."]}
-          className="absolute bottom-16 left-10"
         />
-        <EdgeNote
-          lines={["Cuidar", "compartilhar", "evoluir,", "juntas."]}
-          className="absolute bottom-16 right-10 text-right"
-          align="right"
+        <div
+          className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-espresso/45 to-transparent"
+          aria-hidden="true"
         />
 
-        {/* Coluna central */}
-        <div className="relative mx-auto max-w-2xl text-center">
-          <motion.p {...rise(0.05)} className="eyebrow text-espresso/70">
-            Pele real,
-            <br />
-            rotina possível.
-          </motion.p>
+        <Navbar />
 
-          <motion.h1
-            {...rise(0.15)}
-            className="display mt-7 text-[2.75rem] leading-[0.95] sm:text-6xl lg:text-7xl xl:text-[5.25rem]"
-          >
-            Skincare para uma pele{" "}
-            <span className="relative whitespace-nowrap">
-              mais sua.
-              <span
-                className="absolute -bottom-1 left-0 h-[3px] w-full bg-rose md:-bottom-2"
-                aria-hidden="true"
-              />
-            </span>
-            <motion.span
-              aria-hidden="true"
-              className="ml-2 inline-block h-[0.85em] w-[3px] translate-y-[0.08em] bg-rose align-middle"
-              animate={reduceMotion ? {} : { opacity: [1, 1, 0, 0] }}
-              transition={{ duration: 1.1, repeat: Infinity, times: [0, 0.5, 0.5, 1] }}
-            />
-          </motion.h1>
-
-          <motion.p
-            {...rise(0.3)}
-            className="mx-auto mt-8 max-w-md text-sm leading-relaxed text-espresso/75 md:text-[0.9375rem]"
-          >
-            Rotinas simples, fórmulas eficazes e zero pressão para ter uma pele
-            possível todo dia.
-          </motion.p>
-
-          <motion.div
-            {...rise(0.42)}
-            className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
-          >
-            <LinkButton href="#quiz" withArrow className="w-full sm:w-auto">
-              Descobrir minha rotina
-            </LinkButton>
-            <LinkButton
-              href="#produtos"
-              variant="outline"
-              className="w-full bg-cream/60 sm:w-auto"
+        <div className="relative z-10 flex min-h-[42rem] flex-col px-5 pb-5 pt-24 sm:min-h-[44rem] md:px-8 md:pb-7 md:pt-24 lg:min-h-[min(100vh-5.5rem,52rem)] lg:px-12 xl:px-14">
+          <div className="mt-auto max-w-2xl">
+            <motion.p
+              {...rise(0.05)}
+              className="eyebrow text-cream/85"
             >
-              Conhecer os produtos
-            </LinkButton>
+              Pele real. Rotina possível.
+            </motion.p>
+
+            <motion.h1
+              {...rise(0.15)}
+              className="display mt-4 text-[2.75rem] leading-[0.94] text-cream sm:text-[3.5rem] lg:text-[3.75rem] xl:text-[4.25rem]"
+            >
+              Sua pele.
+              <br />
+              Sua rotina.
+              <br />
+              <span className="text-bubblegum">Do seu jeito.</span>
+            </motion.h1>
+
+            <motion.p
+              {...rise(0.28)}
+              className="mt-5 max-w-md text-sm leading-relaxed text-cream/85 md:text-[0.9375rem]"
+            >
+              Uma rotina simples começa por entender como sua pele está hoje.
+            </motion.p>
+
+            <motion.div {...rise(0.4)} className="mt-6 max-w-xl">
+              <HeroForm />
+            </motion.div>
+          </div>
+
+          {/* Rodapé do hero */}
+          <motion.div
+            {...rise(0.55)}
+            className="mt-6 flex items-end gap-6"
+          >
+            <ul className="glass grid flex-1 gap-4 rounded-[22px] px-6 py-4 sm:grid-cols-3 sm:gap-0">
+              {benefits.map(({ Icon, title, description }, index) => (
+                <li
+                  key={title}
+                  className={`flex items-center gap-3.5 sm:px-6 ${
+                    index > 0 ? "sm:border-l sm:border-espresso/15" : "sm:pl-0"
+                  }`}
+                >
+                  <Icon className="h-5 w-5 shrink-0 text-espresso" />
+                  <div>
+                    <p className="text-[0.8125rem] leading-snug text-espresso">{title}</p>
+                    <p className="mt-0.5 text-[0.6875rem] text-espresso/60">
+                      {description}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <p className="hidden shrink-0 -rotate-6 pb-1 pr-1 font-[family-name:var(--font-script)] text-2xl leading-[1.1] text-cream/90 xl:block">
+              rotina
+              <br />
+              real
+              <br />
+              entre
+              <br />
+              amigas ♡
+            </p>
           </motion.div>
         </div>
-
-        {/* Frasco no mobile */}
-        <motion.div
-          {...rise(0.5)}
-          className="mt-14 flex justify-center lg:hidden"
-          aria-hidden="true"
-        >
-          <ProductPhoto
-            id="gel-de-limpeza-equilibrio"
-            priority
-            sizes="(max-width: 640px) 11rem, 13rem"
-            className="h-auto w-44 -rotate-6 drop-shadow-[0_20px_34px_rgba(56,27,26,0.16)] sm:w-52"
-          />
-        </motion.div>
       </div>
+
+      {/* Adesivos flutuantes — os mesmos do Sem Climão, recortados do render.
+          Ficam nas bordas, fora da faixa da navbar e do texto. */}
+      <Sticker
+        id="flor"
+        className="-left-4 top-[22%] z-30 w-16 md:-left-5 md:w-24"
+        rotate={-12}
+        duration={9}
+      />
+      <Sticker
+        id="estrela"
+        className="right-[3%] top-[60%] z-30 w-12 md:right-[4%] md:w-20"
+        rotate={8}
+        duration={7.5}
+        delay={0.8}
+      />
+      <Sticker
+        id="circulo"
+        className="-right-3 bottom-[14%] z-30 w-12 md:-right-4 md:w-20"
+        rotate={-6}
+        duration={8.5}
+        delay={1.4}
+      />
+      <Sticker
+        id="lua"
+        className="-left-5 bottom-[8%] z-30 hidden w-16 xl:block"
+        rotate={14}
+        duration={8}
+        delay={0.4}
+      />
     </section>
   );
 }

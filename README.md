@@ -12,7 +12,7 @@ Estudo de caso de front-end: uma landing page de e-commerce de skincare, constru
 | Linguagem | TypeScript |
 | Estilos | Tailwind CSS v4 (tokens via `@theme`) |
 | Animação | [`motion`](https://motion.dev) |
-| Fontes | Playfair Display · DM Sans · IBM Plex Mono (`next/font`) |
+| Fontes | Playfair Display · DM Sans · IBM Plex Mono · Caveat (`next/font`) |
 | Deploy | Vercel |
 
 ## Rodando localmente
@@ -47,6 +47,7 @@ Conteúdo e apresentação são separados: os textos, produtos e perguntas do qu
 
 ## Interações
 
+- **Hero** — navbar flutuante em pílula sobre a foto, que vira uma barra fixa quando o hero sai da tela. Card de entrada com anexo de foto (prévia local, sem upload), atalhos de intenção e chamada para o quiz.
 - **Match da Pele** — quiz de 5 perguntas com barra de progresso, navegação para trás e uma rotina recomendada calculada a partir das respostas.
 - **Carrinho** — "Adicionar ao carrinho" alimenta um contexto React; o contador do cabeçalho anima e o botão confirma a ação. Vale para os quatro produtos em destaque e para os dois lançamentos.
 - **Rotina manhã / noite** — alterna os três passos com uma pílula que desliza entre as opções (`layoutId`).
@@ -64,7 +65,9 @@ Tudo respeita `prefers-reduced-motion`: com a preferência ativa, os elementos a
 
 Os frascos são verticais (proporção ~0,6) e as embalagens dos lançamentos são horizontais (~1,4), então a grade principal e a faixa de novidades usam enquadramentos diferentes.
 
-**Decoração** — os blobs do hero, a assinatura líquida, os ícones e os selos de pagamento continuam sendo SVG autorais.
+**Hero** — a foto de fundo está em `public/hero/` (1,9 MB → 123 KB em WebP). Os adesivos que flutuam sobre ela foram recortados do próprio render do "Sem Climão" por componentes conexos do canal alfa: seis formas (estrela, flor, lua, nuvem, gota, círculo) em `public/adesivos/`, 84 KB no total. São literalmente o produto, reaproveitado como decoração.
+
+**Decoração** — os blobs, a assinatura líquida, os ícones e os selos de pagamento continuam sendo SVG autorais.
 
 **Fotos de pessoas** — retratos e o feed do Instagram ainda usam **placeholders desenhados**: um gradiente duotone com formas orgânicas, gerado de forma determinística a partir do id do slot. Para usar fotografia real, edite apenas [`src/data/media.ts`](src/data/media.ts):
 
@@ -84,6 +87,7 @@ Nenhum componente muda. Para URLs remotas, registre o domínio em `next.config.t
 - Link "pular para o conteúdo" e foco visível em todos os elementos interativos.
 - Quiz com `role="radiogroup"`, barra de progresso com `aria-valuenow` e anúncio via `aria-live`.
 - Alternador de rotina com `role="tablist"`, menu mobile fechável com `Esc`.
+- Anexo de foto por `<input type="file">` real, com rótulo associado e botão de remover.
 - Placeholders de imagem expõem a descrição da foto para leitores de tela.
 
 ## Design
@@ -98,6 +102,7 @@ A paleta e a tipografia foram extraídas do mockup de referência e centralizada
 | `--color-sky` `#dceafa` | hero e seção de rotina (com listras) |
 | `--color-lilac` `#efe2f6` | Match da Pele |
 | `--color-butter` `#fce9a4` | CTA final, pílula "manhã" |
+| `--color-bubblegum` `#f5a2cb` | CTA da navbar, destaque do título do hero |
 
 Serifada de alto contraste para os títulos, sans para nomes de produto e monoespaçada para rótulos e textos de apoio — o mesmo trio do mockup.
 

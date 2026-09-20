@@ -131,3 +131,38 @@ export const Pinterest = ({ className = "h-5 w-5" }: IconProps) => (
     />
   </svg>
 );
+
+export const ArrowUpRight = ({ className = "h-3.5 w-3.5" }: IconProps) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+    <path d="M7 17L17 7M8.5 7H17v8.5" />
+  </svg>
+);
+
+export const Bag = ({ className = "h-5 w-5" }: IconProps) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+    <path d="M5.4 7.5h13.2l1 12.5H4.4z" />
+    <path d="M8.8 10V6.9a3.2 3.2 0 0 1 6.4 0V10" />
+  </svg>
+);
+
+export const ImageIcon = ({ className = "h-5 w-5" }: IconProps) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+    <rect x="3.2" y="4.8" width="17.6" height="14.4" rx="3" />
+    <circle cx="8.6" cy="9.8" r="1.5" />
+    <path d="M4 16.6l4.6-4.2 3.5 3.1 3-2.6 4.9 4.3" />
+  </svg>
+);
+
+export const Clock = ({ className = "h-5 w-5" }: IconProps) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+    <circle cx="12" cy="12" r="8.8" />
+    <path d="M12 6.8V12l3.4 2.1" />
+  </svg>
+);
+
+export const Lock = ({ className = "h-4 w-4" }: IconProps) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true" {...stroke}>
+    <rect x="4.8" y="10.4" width="14.4" height="9.4" rx="2.6" />
+    <path d="M8.4 10.4V7.8a3.6 3.6 0 0 1 7.2 0v2.6" />
+  </svg>
+);

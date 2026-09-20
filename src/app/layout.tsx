@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, IBM_Plex_Mono, Playfair_Display } from "next/font/google";
+import { Caveat, DM_Sans, IBM_Plex_Mono, Playfair_Display } from "next/font/google";
 import { CartProvider } from "@/lib/cart";
 import "./globals.css";
 
@@ -21,6 +21,13 @@ const plexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",
   subsets: ["latin", "latin-ext"],
   weight: ["300", "400", "500"],
+  display: "swap",
+});
+
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin", "latin-ext"],
+  weight: ["500"],
   display: "swap",
 });
 
@@ -54,7 +61,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${playfair.variable} ${dmSans.variable} ${plexMono.variable}`}
+      className={`${playfair.variable} ${dmSans.variable} ${plexMono.variable} ${caveat.variable}`}
     >
       <body className="antialiased">
         <a

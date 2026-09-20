@@ -7,13 +7,15 @@ export const site = {
 
 export type NavLink = { label: string; href: string };
 
-export const navLeft: NavLink[] = [
+export const navLinks: NavLink[] = [
+  { label: "Início", href: "#topo" },
+  { label: "Como funciona", href: "#rotina" },
   { label: "Produtos", href: "#produtos" },
-  { label: "Monte sua rotina", href: "#rotina" },
   { label: "Miga Responde", href: "#conteudo" },
 ];
 
-export const navRight: NavLink[] = [
+/** Links extras, só no menu mobile — não cabem na barra flutuante. */
+export const navExtra: NavLink[] = [
   { label: "Clube Miga", href: "#clube" },
   { label: "Sobre", href: "#resultados" },
 ];

@@ -1,6 +1,5 @@
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Footer } from "@/components/layout/Footer";
-import { Header } from "@/components/layout/Header";
 import { Club } from "@/components/sections/Club";
 import { Content } from "@/components/sections/Content";
 import { FeaturedProducts } from "@/components/sections/FeaturedProducts";
@@ -16,7 +15,6 @@ export default function Home() {
   return (
     <>
       <AnnouncementBar />
-      <Header />
       <main id="conteudo-principal">
         <Hero />
         <TrustBar />
