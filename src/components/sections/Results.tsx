@@ -40,11 +40,15 @@ export function Results() {
       <div className="grid lg:grid-cols-2">
         {/* Foto com título sobreposto */}
         <div className="relative min-h-[26rem] lg:min-h-[34rem]">
-          <Media
-            id="resultados-trio"
-            className="absolute inset-0"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
+          {/* O <Media> define a própria posição, então ele precisa de um pai
+              dimensionado em vez de receber `absolute` por className. */}
+          <div className="absolute inset-0">
+            <Media
+              id="resultados-trio"
+              className="h-full w-full"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
           <div className="absolute inset-0 bg-gradient-to-r from-cream/75 via-cream/20 to-transparent" />
           <Reveal className="absolute bottom-10 left-6 max-w-xs md:left-10 md:bottom-14">
             <h2

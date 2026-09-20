@@ -1,96 +1,113 @@
 import type { ProductImageId } from "./product-images";
+import type { StickerId } from "./stickers";
 
-export type SkinTag = "oleosa" | "seca" | "sensivel" | "mista";
+export type SkinTag = "oleosa" | "mista" | "seca" | "sensivel";
 
 export type QuizOption = { label: string; tag: SkinTag };
 
 export type QuizQuestion = { id: string; prompt: string; options: QuizOption[] };
 
+/** Cinco perguntas, quatro alternativas cada — no formato de teste de revista. */
 export const quizQuestions: QuizQuestion[] = [
   {
-    id: "estado",
-    prompt: "Como está sua pele hoje?",
+    id: "acordou",
+    prompt: "Você acabou de acordar. Como está a sua pele?",
     options: [
-      { label: "Mais oleosa que o normal", tag: "oleosa" },
-      { label: "Equilibrada", tag: "mista" },
-      { label: "Mais seca que o normal", tag: "seca" },
+      { label: "Brilhando mais do que eu queria", tag: "oleosa" },
+      { label: "De boa, nem oleosa nem seca", tag: "mista" },
+      { label: "Repuxando desde a primeira olhada", tag: "seca" },
+      { label: "Vermelhinha e reclamando", tag: "sensivel" },
     ],
   },
   {
     id: "incomodo",
-    prompt: "O que mais te incomoda?",
+    prompt: "O que mais te incomoda quando você se olha no espelho?",
     options: [
-      { label: "Brilho e poros aparentes", tag: "oleosa" },
+      { label: "Poros e brilho na zona T", tag: "oleosa" },
       { label: "Marquinhas e tom desigual", tag: "mista" },
-      { label: "Repuxo e descamação", tag: "seca" },
-      { label: "Vermelhidão e ardência", tag: "sensivel" },
+      { label: "Ressecamento e descamação", tag: "seca" },
+      { label: "Ardência quando uso qualquer coisa", tag: "sensivel" },
     ],
   },
   {
     id: "rotina",
-    prompt: "Como é a sua rotina hoje?",
+    prompt: "A sua rotina de skincare hoje é mais ou menos assim:",
     options: [
-      { label: "Ainda não tenho uma", tag: "sensivel" },
-      { label: "Só lavo o rosto", tag: "oleosa" },
+      { label: "Lavo o rosto e tô pronta", tag: "oleosa" },
       { label: "Tenho o básico montado", tag: "mista" },
       { label: "Rotina completa, manhã e noite", tag: "seca" },
+      { label: "Ainda estou montando a minha", tag: "sensivel" },
     ],
   },
   {
     id: "tempo",
-    prompt: "Quanto tempo você tem de manhã?",
+    prompt: "Quanto tempo você realmente tem de manhã?",
     options: [
-      { label: "Menos de 2 minutos", tag: "oleosa" },
-      { label: "Uns 5 minutos", tag: "mista" },
-      { label: "O tempo que a minha pele precisar", tag: "seca" },
+      { label: "Menos de 2 minutos, corrida", tag: "oleosa" },
+      { label: "Uns 5 minutos, dá pra encaixar", tag: "mista" },
+      { label: "O tempo que a minha pele pedir", tag: "seca" },
+      { label: "Depende muito do dia", tag: "sensivel" },
     ],
   },
   {
     id: "desejo",
-    prompt: "O que você quer sentir daqui a 3 meses?",
+    prompt: "Daqui a três meses, você quer se olhar e pensar:",
     options: [
-      { label: "A pele mais equilibrada", tag: "oleosa" },
-      { label: "Textura mais uniforme", tag: "mista" },
-      { label: "Conforto e maciez o dia todo", tag: "seca" },
-      { label: "Menos sensibilidade", tag: "sensivel" },
+      { label: '"Minha pele está equilibrada"', tag: "oleosa" },
+      { label: '"Que textura uniforme"', tag: "mista" },
+      { label: '"Confortável o dia inteiro"', tag: "seca" },
+      { label: '"Finalmente parou de arder"', tag: "sensivel" },
     ],
   },
 ];
 
 export type QuizResult = {
   tag: SkinTag;
+  /** Título divertido, no espírito de teste de revista. */
   title: string;
+  /** Nome da rotina recomendada. */
+  routine: string;
   description: string;
+  /** Adesivo que vira o selo do resultado. */
+  badge: StickerId;
   productIds: ProductImageId[];
 };
 
 export const quizResults: Record<SkinTag, QuizResult> = {
   oleosa: {
     tag: "oleosa",
-    title: "Rotina Equilíbrio",
+    title: "Glow sem filtro",
+    routine: "Rotina Equilíbrio",
     description:
-      "Sua pele pede limpeza que controla o brilho sem agredir. Comece leve e vá firme na constância.",
+      "Sua pele produz óleo de sobra — e isso não é defeito, é proteção. O caminho é limpar bem sem agredir e deixar a niacinamida cuidar do resto.",
+    badge: "estrela",
     productIds: ["gel-de-limpeza-equilibrio", "serum-niacinamida"],
   },
   mista: {
     tag: "mista",
-    title: "Rotina Uniforme",
+    title: "Meio-termo esperto",
+    routine: "Rotina Uniforme",
     description:
-      "Sua pele está pedindo consistência e um ativo certeiro para emparelhar o tom ao longo das semanas.",
+      "Nem muito oleosa, nem muito seca: sua pele pede constância e um ativo certeiro para emparelhar o tom ao longo das semanas.",
+    badge: "flor",
     productIds: ["tonico-suave", "serum-niacinamida", "creme-hidratante"],
   },
   seca: {
     tag: "seca",
-    title: "Rotina Conforto",
+    title: "Sede de hidratação",
+    routine: "Rotina Conforto",
     description:
-      "O foco aqui é devolver água e selar hidratação. Camadas leves funcionam melhor que uma pesada.",
+      "O que falta é água, não óleo. Camadas leves funcionam melhor que uma pesada — e o creme entra no fim para selar tudo.",
+    badge: "gota",
     productIds: ["tonico-suave", "creme-hidratante"],
   },
   sensivel: {
     tag: "sensivel",
-    title: "Rotina Calma",
+    title: "Modo delicadeza",
+    routine: "Rotina Calma",
     description:
-      "Menos passos, mais cuidado. Vamos fortalecer a barreira antes de introduzir qualquer ativo forte.",
+      "Sua barreira está pedindo trégua. Menos passos, fórmulas suaves e nada de ativo forte antes de ela estar fortalecida.",
+    badge: "nuvem",
     productIds: ["gel-de-limpeza-equilibrio", "creme-hidratante"],
   },
 };

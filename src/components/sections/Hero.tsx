@@ -45,6 +45,7 @@ export function Hero() {
           alt="Duas amigas juntas no banheiro; uma delas segura o Creme Hidratante Miga e a outra tem creme aplicado na bochecha"
           fill
           priority
+          quality={90}
           sizes="100vw"
           className="object-cover object-[58%_22%] md:object-center"
         />
@@ -96,28 +97,23 @@ export function Hero() {
           {/* Rodapé do hero */}
           <motion.div
             {...rise(0.55)}
-            className="mt-6 flex items-end gap-6"
+            className="relative mt-6 flex items-end justify-center"
           >
-            <ul className="glass grid flex-1 gap-4 rounded-[22px] px-6 py-4 sm:grid-cols-3 sm:gap-0">
-              {benefits.map(({ Icon, title, description }, index) => (
+            <ul className="glass grid gap-3 rounded-full px-5 py-2.5 sm:grid-flow-col sm:auto-cols-max sm:gap-0">
+              {benefits.map(({ Icon, title }, index) => (
                 <li
                   key={title}
-                  className={`flex items-center gap-3.5 sm:px-6 ${
-                    index > 0 ? "sm:border-l sm:border-espresso/15" : "sm:pl-0"
+                  className={`flex items-center gap-2.5 sm:px-5 ${
+                    index > 0 ? "sm:border-l sm:border-espresso/15" : "sm:pl-1"
                   }`}
                 >
-                  <Icon className="h-5 w-5 shrink-0 text-espresso" />
-                  <div>
-                    <p className="text-[0.8125rem] leading-snug text-espresso">{title}</p>
-                    <p className="mt-0.5 text-[0.6875rem] text-espresso/60">
-                      {description}
-                    </p>
-                  </div>
+                  <Icon className="h-4 w-4 shrink-0 text-espresso" />
+                  <p className="text-[0.75rem] leading-snug text-espresso">{title}</p>
                 </li>
               ))}
             </ul>
 
-            <p className="hidden shrink-0 -rotate-6 pb-1 pr-1 font-[family-name:var(--font-script)] text-2xl leading-[1.1] text-cream/90 xl:block">
+            <p className="absolute bottom-0 right-0 hidden -rotate-6 font-[family-name:var(--font-script)] text-2xl leading-[1.1] text-cream/90 xl:block">
               rotina
               <br />
               real

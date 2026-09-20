@@ -76,6 +76,12 @@ function Placeholder({ id, tint }: { id: string; tint: [string, string] }) {
 
 type MediaProps = {
   id: MediaId;
+  /**
+   * Classes de tamanho/forma (aspect, h/w, rounded).
+   * Não passe classes de posicionamento: o componente já é `relative`, porque
+   * o <Image fill> precisa de um ancestral posicionado. Para encaixá-lo num
+   * espaço absoluto, envolva-o numa div `absolute`.
+   */
   className?: string;
   /** Prioriza o carregamento (use apenas em imagens acima da dobra). */
   priority?: boolean;

@@ -47,8 +47,8 @@ Conteúdo e apresentação são separados: os textos, produtos e perguntas do qu
 
 ## Interações
 
-- **Hero** — navbar flutuante em pílula sobre a foto, que vira uma barra fixa quando o hero sai da tela. Card de entrada com anexo de foto (prévia local, sem upload), atalhos de intenção e chamada para o quiz.
-- **Match da Pele** — quiz de 5 perguntas com barra de progresso, navegação para trás e uma rotina recomendada calculada a partir das respostas.
+- **Hero** — navbar flutuante em pílula sobre a foto, que vira uma barra fixa quando o hero sai da tela. Card de entrada enxuto: anexar uma foto (prévia local, sem upload) e seguir para o teste.
+- **Match da Pele** — teste em cinco perguntas no formato de revista, com alternativas a/b/c/d, progresso em estrelinhas e **quatro resultados distintos** conforme as respostas. Cada resultado tem selo, nome próprio, rotina recomendada e um botão que joga os produtos na sacola de uma vez.
 - **Carrinho** — "Adicionar ao carrinho" alimenta um contexto React; o contador do cabeçalho anima e o botão confirma a ação. Vale para os quatro produtos em destaque e para os dois lançamentos.
 - **Rotina manhã / noite** — alterna os três passos com uma pílula que desliza entre as opções (`layoutId`).
 - **Resultados** — os percentuais contam de zero quando a seção entra na viewport.
@@ -61,25 +61,27 @@ Tudo respeita `prefers-reduced-motion`: com a preferência ativa, os elementos a
 
 ## Imagens
 
-**Embalagens** — renders fotográficos em `public/produtos/`, servidos por `next/image`. Os PNGs originais foram recortados no alfa, reduzidos para 1200 px no lado maior e convertidos para WebP: 8,2 MB → 491 KB, sem perda visível. O registro com caminhos, dimensões intrínsecas e textos alternativos vive em [`src/data/product-images.ts`](src/data/product-images.ts); os originais ficam em `design/originais/`, fora do versionamento.
+**Embalagens** — renders fotográficos em `public/produtos/`, servidos por `next/image`. Os PNGs originais foram recortados no alfa, reduzidos para 1200 px no lado maior e convertidos para WebP: 8,2 MB → 491 KB. O registro com caminhos, dimensões intrínsecas e textos alternativos vive em [`src/data/product-images.ts`](src/data/product-images.ts).
 
 Os frascos são verticais (proporção ~0,6) e as embalagens dos lançamentos são horizontais (~1,4), então a grade principal e a faixa de novidades usam enquadramentos diferentes.
 
-**Hero** — a foto de fundo está em `public/hero/` (1,9 MB → 123 KB em WebP). Os adesivos que flutuam sobre ela foram recortados do próprio render do "Sem Climão" por componentes conexos do canal alfa: seis formas (estrela, flor, lua, nuvem, gota, círculo) em `public/adesivos/`, 84 KB no total. São literalmente o produto, reaproveitado como decoração.
-
-**Decoração** — os blobs, a assinatura líquida, os ícones e os selos de pagamento continuam sendo SVG autorais.
-
-**Fotos de pessoas** — retratos e o feed do Instagram ainda usam **placeholders desenhados**: um gradiente duotone com formas orgânicas, gerado de forma determinística a partir do id do slot. Para usar fotografia real, edite apenas [`src/data/media.ts`](src/data/media.ts):
+**Fotografia de campanha** — em `public/fotos/` e `public/hero/`, também otimizadas para WebP (11,7 MB → 908 KB). O slot de cada seção vive em [`src/data/media.ts`](src/data/media.ts); trocar uma foto é trocar um `src`, nenhum componente muda:
 
 ```ts
 "quiz-retrato": {
-  src: "/fotos/retrato.jpg",   // ou uma URL remota
-  alt: "Retrato em close de uma pessoa com sardas",
+  src: "/fotos/adesivos-no-rosto.webp",
+  alt: "Pessoa de cabelo curto com adesivos para acne aplicados no rosto",
   tint: ["#f6dcc8", "#e7b48f"],
 },
 ```
 
-Nenhum componente muda. Para URLs remotas, registre o domínio em `next.config.ts` › `images.remotePatterns`.
+Dois slots (`artigo-niacinamida` e `artigo-barreira`) ainda usam o **placeholder desenhado**: um gradiente duotone com formas orgânicas, gerado de forma determinística a partir do id. Quem tiver foto é só apontar o `src`.
+
+**Adesivos** — os elementos que flutuam sobre o hero e o teste foram recortados do próprio render do "Sem Climão", separando os componentes conexos do canal alfa: seis formas (estrela, flor, lua, nuvem, gota, círculo) em `public/adesivos/`, 84 KB no total. São literalmente o produto, reaproveitado como decoração — e os mesmos adesivos aparecem no rosto da foto do teste.
+
+**Qualidade** — o `next/image` recomprime na entrega, e o padrão dele é `quality: 75`. Sobre um arquivo já comprimido, isso empilhava duas perdas. A foto do hero agora é gravada a q95 e servida com `quality={90}` (declarado em `next.config.ts` › `images.qualities`).
+
+**Decoração** — os blobs, a assinatura líquida, os ícones e os selos de pagamento continuam sendo SVG autorais.
 
 ## Acessibilidade
 
