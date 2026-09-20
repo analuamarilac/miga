@@ -6,7 +6,7 @@ import { ArrowRight, Check } from "@/components/art/Icons";
 import { Button } from "@/components/ui/Button";
 import { Media } from "@/components/ui/Media";
 import { Reveal } from "@/components/ui/Reveal";
-import { products } from "@/data/products";
+import { allProducts } from "@/data/products";
 import { quizQuestions, quizResults, type SkinTag } from "@/data/quiz";
 
 /** Elege o perfil mais escolhido; empate resolve pela resposta mais recente. */
@@ -117,7 +117,7 @@ function QuizCard() {
 
             <ul className="mt-5 space-y-2">
               {result.productIds.map((id) => {
-                const product = products.find((item) => item.id === id);
+                const product = allProducts.find((item) => item.id === id);
                 if (!product) return null;
                 return (
                   <li

@@ -8,13 +8,8 @@ import {
   FlowerBlob,
   SparkleBlob,
 } from "@/components/art/Blobs";
-import { ProductShot } from "@/components/art/ProductShot";
+import { ProductPhoto } from "@/components/ui/ProductPhoto";
 import { LinkButton } from "@/components/ui/Button";
-
-const heroBottle = {
-  title: ["Gel de limpeza", "Equilíbrio"],
-  caption: ["limpa sem ressecar", "pele real, todo dia"],
-};
 
 /** Texto vertical das bordas — decorativo, some em telas pequenas. */
 function EdgeNote({
@@ -129,11 +124,11 @@ export function Hero() {
           className="pointer-events-none absolute -left-10 top-1/2 hidden w-[19rem] -translate-y-1/2 lg:block xl:left-4 xl:w-[21rem]"
           aria-hidden="true"
         >
-          <ProductShot
-            kind="pump"
-            label={heroBottle}
-            accent="#f4ece3"
-            className="w-full drop-shadow-[0_24px_40px_rgba(56,27,26,0.12)]"
+          <ProductPhoto
+            id="gel-de-limpeza-equilibrio"
+            priority
+            sizes="(max-width: 1024px) 0px, 21rem"
+            className="h-auto w-full drop-shadow-[0_28px_44px_rgba(56,27,26,0.16)]"
           />
         </motion.div>
 
@@ -206,11 +201,11 @@ export function Hero() {
           className="mt-14 flex justify-center lg:hidden"
           aria-hidden="true"
         >
-          <ProductShot
-            kind="pump"
-            label={heroBottle}
-            accent="#f4ece3"
-            className="w-44 -rotate-6 drop-shadow-[0_20px_34px_rgba(56,27,26,0.14)] sm:w-52"
+          <ProductPhoto
+            id="gel-de-limpeza-equilibrio"
+            priority
+            sizes="(max-width: 640px) 11rem, 13rem"
+            className="h-auto w-44 -rotate-6 drop-shadow-[0_20px_34px_rgba(56,27,26,0.16)] sm:w-52"
           />
         </motion.div>
       </div>

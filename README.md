@@ -33,11 +33,13 @@ src/
 │   ├── layout.tsx         # fontes, metadados, provider do carrinho
 │   └── page.tsx           # composição das seções
 ├── components/
-│   ├── art/               # ilustrações SVG (frascos, blobs, logo, ícones)
+│   ├── art/               # ilustrações SVG (blobs, logo, ícones)
 │   ├── layout/            # aviso, cabeçalho, rodapé
 │   ├── sections/          # uma seção da página por arquivo
-│   └── ui/                # botão, estrelas, reveal, mídia, newsletter
+│   └── ui/                # botão, estrelas, reveal, foto, mídia, newsletter
 ├── data/                  # todo o conteúdo editável (produtos, quiz, artigos…)
+│   ├── product-images.ts  # registro dos renders de embalagem
+│   └── media.ts           # slots de fotografia (placeholder até ter foto)
 └── lib/cart.tsx           # estado do carrinho (contexto React)
 ```
 
@@ -46,7 +48,7 @@ Conteúdo e apresentação são separados: os textos, produtos e perguntas do qu
 ## Interações
 
 - **Match da Pele** — quiz de 5 perguntas com barra de progresso, navegação para trás e uma rotina recomendada calculada a partir das respostas.
-- **Carrinho** — "Adicionar ao carrinho" alimenta um contexto React; o contador do cabeçalho anima e o botão confirma a ação.
+- **Carrinho** — "Adicionar ao carrinho" alimenta um contexto React; o contador do cabeçalho anima e o botão confirma a ação. Vale para os quatro produtos em destaque e para os dois lançamentos.
 - **Rotina manhã / noite** — alterna os três passos com uma pílula que desliza entre as opções (`layoutId`).
 - **Resultados** — os percentuais contam de zero quando a seção entra na viewport.
 - **Newsletter** — validação de e-mail no cliente, com estado de erro e de sucesso (sem back-end).
@@ -56,11 +58,15 @@ Conteúdo e apresentação são separados: os textos, produtos e perguntas do qu
 
 Tudo respeita `prefers-reduced-motion`: com a preferência ativa, os elementos aparecem estáticos em vez de animados.
 
-## Ilustrações e fotografia
+## Imagens
 
-Os cinco frascos (bomba, tônico, conta-gotas, pote e bisnaga), os blobs do hero, a assinatura líquida e os selos de pagamento são **SVG autorais** — nada de imagem binária para embalagem.
+**Embalagens** — renders fotográficos em `public/produtos/`, servidos por `next/image`. Os PNGs originais foram recortados no alfa, reduzidos para 1200 px no lado maior e convertidos para WebP: 8,2 MB → 491 KB, sem perda visível. O registro com caminhos, dimensões intrínsecas e textos alternativos vive em [`src/data/product-images.ts`](src/data/product-images.ts); os originais ficam em `design/originais/`, fora do versionamento.
 
-As fotos (retratos e o feed do Instagram) são **placeholders desenhados**: um gradiente duotone com formas orgânicas, gerado de forma determinística a partir do id do slot. Para usar fotografia real, edite apenas `src/data/media.ts`:
+Os frascos são verticais (proporção ~0,6) e as embalagens dos lançamentos são horizontais (~1,4), então a grade principal e a faixa de novidades usam enquadramentos diferentes.
+
+**Decoração** — os blobs do hero, a assinatura líquida, os ícones e os selos de pagamento continuam sendo SVG autorais.
+
+**Fotos de pessoas** — retratos e o feed do Instagram ainda usam **placeholders desenhados**: um gradiente duotone com formas orgânicas, gerado de forma determinística a partir do id do slot. Para usar fotografia real, edite apenas [`src/data/media.ts`](src/data/media.ts):
 
 ```ts
 "quiz-retrato": {

@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 import { ArrowRight, Moon, Sun } from "@/components/art/Icons";
-import { ProductShot } from "@/components/art/ProductShot";
+import { ProductPhoto } from "@/components/ui/ProductPhoto";
 import { LinkButton } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { routine } from "@/data/routine";
@@ -97,7 +97,7 @@ export function Routine() {
               >
                 {period.steps.map((step, index) => (
                   <li
-                    key={step.order}
+                    key={step.title}
                     className={`group flex flex-col items-center px-4 text-center sm:px-6 ${
                       index > 0 ? "sm:border-l sm:border-espresso/12" : ""
                     }`}
@@ -106,12 +106,13 @@ export function Routine() {
                       {index + 1}. {step.title}
                     </p>
 
-                    <ProductShot
-                      kind={step.shot}
-                      label={step.label}
-                      accent="#f5ece2"
-                      className="mt-6 h-52 w-full transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-2 md:h-60"
-                    />
+                    <div className="mt-6 flex h-52 items-center justify-center md:h-60">
+                      <ProductPhoto
+                        id={step.productId}
+                        sizes="(max-width: 640px) 60vw, 22vw"
+                        className="max-h-full w-auto max-w-full object-contain transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-2"
+                      />
+                    </div>
 
                     <p className="mt-6 max-w-[16rem] text-xs leading-relaxed text-espresso/75">
                       {step.description}

@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Renders originais dos produtos (pesados) — versão otimizada vive em public/produtos/
+/design/originais/

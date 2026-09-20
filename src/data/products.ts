@@ -1,7 +1,8 @@
-export type ShotKind = "pump" | "toner" | "dropper" | "jar" | "tube";
+import type { ProductImageId } from "./product-images";
 
 export type Product = {
-  id: string;
+  /** Também é a chave do render em `product-images.ts`. */
+  id: ProductImageId;
   name: string;
   claim: string;
   price: number;
@@ -9,15 +10,12 @@ export type Product = {
   reviews: number;
   size: string;
   badge?: string;
-  shot: ShotKind;
-  /** Rótulo impresso na arte SVG do frasco */
-  label: { title: string[]; caption: string[] };
-  accent: string;
 };
 
+/** Os quatro da grade principal, na ordem do mockup. */
 export const products: Product[] = [
   {
-    id: "gel-limpeza-equilibrio",
+    id: "gel-de-limpeza-equilibrio",
     name: "Gel de Limpeza Equilíbrio",
     claim: "Limpa sem ressecar",
     price: 89.9,
@@ -25,12 +23,6 @@ export const products: Product[] = [
     reviews: 328,
     size: "200 ml",
     badge: "Mais vendido",
-    shot: "pump",
-    label: {
-      title: ["Gel de limpeza", "Equilíbrio"],
-      caption: ["limpa sem ressecar", "pele real, todo dia"],
-    },
-    accent: "#f2e7dd",
   },
   {
     id: "tonico-suave",
@@ -40,12 +32,6 @@ export const products: Product[] = [
     rating: 4.5,
     reviews: 241,
     size: "150 ml",
-    shot: "toner",
-    label: {
-      title: ["Tônico suave", "Hidrata e prepara"],
-      caption: ["panthenol", "aloe vera"],
-    },
-    accent: "#f8c9d8",
   },
   {
     id: "serum-niacinamida",
@@ -55,12 +41,6 @@ export const products: Product[] = [
     rating: 5,
     reviews: 412,
     size: "30 ml",
-    shot: "dropper",
-    label: {
-      title: ["Sérum", "Niacinamida 5%"],
-      caption: ["uniformiza", "fortalece"],
-    },
-    accent: "#f6ece0",
   },
   {
     id: "creme-hidratante",
@@ -70,14 +50,38 @@ export const products: Product[] = [
     rating: 4.5,
     reviews: 287,
     size: "50 g",
-    shot: "jar",
-    label: {
-      title: ["Creme hidratante", "Barreira saudável"],
-      caption: ["ceramidas + pantenol"],
-    },
-    accent: "#f3f0ea",
   },
 ];
+
+/**
+ * Lançamentos. Ficam numa faixa própria porque os renders são horizontais
+ * (embalagem + elementos soltos) e não encaixam na grade de frascos verticais.
+ * Contagem de avaliações mais baixa que a do catálogo, coerente com produto novo.
+ */
+export const novelties: Product[] = [
+  {
+    id: "adesivos-sem-climao",
+    name: "Adesivos Sem Climão",
+    claim: "Protege e cuida",
+    price: 64.9,
+    rating: 4.5,
+    reviews: 218,
+    size: "36 unidades",
+    badge: "Novo",
+  },
+  {
+    id: "petalas-para-os-olhos",
+    name: "Pétalas para os Olhos",
+    claim: "Hidrata e refresca",
+    price: 84.9,
+    rating: 5,
+    reviews: 176,
+    size: "30 pares",
+    badge: "Novo",
+  },
+];
+
+export const allProducts: Product[] = [...products, ...novelties];
 
 export const brl = (value: number) =>
   value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });

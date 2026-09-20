@@ -1,3 +1,5 @@
+import type { ProductImageId } from "./product-images";
+
 export type SkinTag = "oleosa" | "seca" | "sensivel" | "mista";
 
 export type QuizOption = { label: string; tag: SkinTag };
@@ -59,7 +61,7 @@ export type QuizResult = {
   tag: SkinTag;
   title: string;
   description: string;
-  productIds: string[];
+  productIds: ProductImageId[];
 };
 
 export const quizResults: Record<SkinTag, QuizResult> = {
@@ -68,7 +70,7 @@ export const quizResults: Record<SkinTag, QuizResult> = {
     title: "Rotina Equilíbrio",
     description:
       "Sua pele pede limpeza que controla o brilho sem agredir. Comece leve e vá firme na constância.",
-    productIds: ["gel-limpeza-equilibrio", "serum-niacinamida"],
+    productIds: ["gel-de-limpeza-equilibrio", "serum-niacinamida"],
   },
   mista: {
     tag: "mista",
@@ -89,6 +91,6 @@ export const quizResults: Record<SkinTag, QuizResult> = {
     title: "Rotina Calma",
     description:
       "Menos passos, mais cuidado. Vamos fortalecer a barreira antes de introduzir qualquer ativo forte.",
-    productIds: ["gel-limpeza-equilibrio", "creme-hidratante"],
+    productIds: ["gel-de-limpeza-equilibrio", "creme-hidratante"],
   },
 };
